@@ -17,11 +17,11 @@ public class Menuitems implements Serializable {
 	/**
 	 * 菜单号
 	 */
-	private String menuid;
+	private Menu menu;
 	/**
 	 * 菜品号
 	 */
-	private String foodid;
+	private food food;
 	/**
 	 * 数量
 	 */
@@ -37,17 +37,17 @@ public class Menuitems implements Serializable {
 	public void setItemsid(String itemsid) {
 		this.itemsid = itemsid;
 	}
-	public String getMenuid() {
-		return menuid;
+	public Menu getMenu() {
+		return menu;
 	}
-	public void setMenuid(String menuid) {
-		this.menuid = menuid;
+	public void setMenuid(Menu menu) {
+		this.menu = menu;
 	}
-	public String getFoodid() {
-		return foodid;
+	public food getFood() {
+		return food;
 	}
-	public void setFoodid(String foodid) {
-		this.foodid = foodid;
+	public void setFoodid(food food) {
+		this.food = food;
 	}
 	public int getAmount() {
 		return amount;
