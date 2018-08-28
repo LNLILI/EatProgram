@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class DBUTil {
 
-	public static final String URL = "jdbc:mysql:///ky";
+	public static final String URL = "jdbc:mysql:///canyin";
 	public static final String DRIVER = "com.mysql.jdbc.Driver";
 	public static final String USERNAME = "root";
 	public static final String PASSWORD = "1234";

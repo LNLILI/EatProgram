@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import dao.caixiDao;
 import entity.cuisines;
@@ -15,29 +16,29 @@ import util.DBUTil;
 public class caixiDaoimpl implements caixiDao {
 
 	@Override
-	public List select() {
+	public Vector select() {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs=null;
-		String sql="select*from food";
+		String sql="select*from cuisines";
+		Vector rowv = new Vector<>();
 		try {
 			conn=DBUTil.getConn();
 			pstm = conn.prepareStatement(sql);
 			rs=pstm.executeQuery();
-			List list=new ArrayList<>();
+			Vector v;
 			while(rs.next()){
-				cuisines c=new cuisines();
-				c.setCuisinesname(rs.getString("Cuisinesname"));
-				c.setCuisinesid(rs.getString("Cuisinesid"));				
-				list.add(c);
-				return list;
+				v = new Vector();
+				v.add(rs.getString("cuis_no"));
+				v.add(rs.getString("cuis_name"));
+				rowv.add(v);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBUTil.close(conn, pstm, rs);
 		}
-		return null;
+		return rowv;
 	}
 
 

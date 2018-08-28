@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import dao.caipinDao;
 import entity.food;
@@ -16,24 +17,25 @@ import util.DBUTil;
 public class caipinDaoimpl implements caipinDao {
 
 	@Override
-	public List select() {
+	public Vector select() {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs=null;
 		String sql="select*from food";
+		Vector rowv=new Vector<>();
 		try {
 			conn=DBUTil.getConn();
 			pstm = conn.prepareStatement(sql);
 			rs=pstm.executeQuery();
-			List list=new ArrayList<>();
+			Vector v;
 			while(rs.next()){
-				food food=new food();
-				food.setFoodname(rs.getString("Foodname"));
-				food.setCuisinesid(rs.getString("Cuisinesid"));
-				food.setUnit(rs.getString("Unit"));
-				food.setPrice(rs.getString("price"));
-				list.add(food);
-				return list;
+				v = new Vector();
+				v.add(rs.getString("food_no"));
+				v.add(rs.getString("food_name"));
+				v.add(rs.getString("food_cuis"));
+				v.add(rs.getString("food_unit"));
+				v.add(rs.getFloat("food_price"));
+				rowv.add(v);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
