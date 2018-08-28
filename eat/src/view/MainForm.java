@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
@@ -13,12 +14,19 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
+import java.awt.Color;
+import java.awt.Component;
 
 public class MainForm extends JFrame {
 
 	private JPanel contentPane;
 	JDesktopPane table = new JDesktopPane();
+	
+    
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,6 +47,7 @@ public class MainForm extends JFrame {
 	 * Create the frame.
 	 */
 	public MainForm() {
+		setAlwaysOnTop(true);
 		setTitle("\u9910\u996E\u7BA1\u7406\u7CFB\u7EDF");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 833, 421);
@@ -54,16 +63,17 @@ public class MainForm extends JFrame {
 		JMenu menu = new JMenu("\u9910\u53F0\u7BA1\u7406");
 		menuBar.add(menu);
 		
+		
+		
 		JMenuItem addBookType = new JMenuItem("\u67E5\u8BE2\u9910\u53F0");
 		addBookType.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
+			public void actionPerformed(ActionEvent e) {	
 			}
 		});
 		menu.add(addBookType);
 		
 		JMenuItem typeMangerMenu = new JMenuItem("\u589E\u52A0\u9910\u53F0");
+		typeMangerMenu.setForeground(Color.BLACK);
 		typeMangerMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddEatNumForm form = new AddEatNumForm();
@@ -72,6 +82,10 @@ public class MainForm extends JFrame {
 			}
 		});
 		menu.add(typeMangerMenu);
+		
+		
+		
+		
 		
 		JMenu mnNewMenu = new JMenu("\u83DC\u5355\u7BA1\u7406");
 		menuBar.add(mnNewMenu);
@@ -160,10 +174,12 @@ public class MainForm extends JFrame {
 			}
 		});
 		mnNewMenu_3.add(mntmNewMenuItem_5);
+		table.setBackground(Color.WHITE);
 		
 		
 		
 		table.setBounds(0, 20, 817, 353);
 		contentPane.add(table);
+		
 	}
 }
