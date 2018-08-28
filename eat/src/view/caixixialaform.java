@@ -48,6 +48,7 @@ public class caixixialaform extends JFrame {
 	 * Create the frame.
 	 */
 	public caixixialaform() {
+		setTitle("\u83DC\u7CFB\u7BA1\u7406");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 529, 369);
