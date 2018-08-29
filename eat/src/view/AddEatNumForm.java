@@ -19,7 +19,9 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.NumDao;
 import dao.impl.NumDaoImpl;
+import dao.impl.tableDaoImpl;
 import entity.Eat;
+import entity.Table;
 
 public class AddEatNumForm extends JInternalFrame {
 	
@@ -36,6 +38,7 @@ public class AddEatNumForm extends JInternalFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -77,7 +80,20 @@ public AddEatNumForm() {
 	getContentPane().add(textField_1);
 	textField_1.setColumns(10);
 	
-	JButton button = new JButton("\u589E\u52A0");
+	JButton button = new JButton("\u589E\u52A0");                         
+	button.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			
+			Table ta1=new Table();
+			ta1.setTableid(textField.getText());
+			ta1.setSeatnym(Integer.parseInt(textField_1.getText()));
+			tableDaoImpl ta2=new tableDaoImpl();
+			ta2.addTable(ta1);
+			JOptionPane.showMessageDialog(null, "³É¹¦");
+			setVisible(true);
+		}
+	});
 	button.setBounds(131, 136, 64, 23);
 	getContentPane().add(button);
 	
