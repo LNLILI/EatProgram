@@ -24,25 +24,30 @@ public class menuItemsDaoImpl implements menuItemsDao {
 	}
 
 	@Override
-	public List end() {
+	public Vector end() {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		String sql = "select * from menu";
-		List list = new ArrayList();
+		Vector rowv = new Vector();
 		try {
 			conn = DBUTil.getConn();
 			pstm = conn.prepareStatement(sql);
 			rs = pstm.executeQuery();
+			Vector v = null;
 			while(rs.next()){
-				Menu  menu = new Menu();
-				menu.setMenuId(rs.getString("menuid"));
-				menu.setTableId(rs.getString("table"));
-				menu.setMenuTime(rs.getString("menutime"));
-				menu.setTotalPrice(rs.getFloat("totalprice"));
-				menu.setIschecked(rs.getBoolean("ischecked"));
-				list.add(menu);
+				v = new Vector();
+				v.add(rs.getString("menu_no"));
+				v.add(rs.getString("menu_tableid"));
+				v.add(rs.getString("menu_time"));
+				v.add(rs.getFloat("menu_total"));
+				if(rs.getString("menu_ischecked").equals(0)){
+					v.add("“—Ω·’À");
+				}else{
+					v.add("Œ¥Ω·’À");
+				}
+				rowv.add(v);
 			}
 			
 		} catch (Exception e) {
@@ -50,7 +55,7 @@ public class menuItemsDaoImpl implements menuItemsDao {
 		}finally{
 			DBUTil.close(conn, pstm, rs);
 		}
-		return list;
+		return rowv;
 	}
 
 }
