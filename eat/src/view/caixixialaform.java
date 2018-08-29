@@ -20,6 +20,7 @@ import dao.impl.caixiDaoimpl;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class caixixialaform extends JFrame {
 	
@@ -85,33 +86,35 @@ public class caixixialaform extends JFrame {
 		getContentPane().add(table);
 		
 		JLabel lblNewLabel = new JLabel("\u83DC\u7CFB\u53F7");
+		lblNewLabel.setFont(new Font("¿¬Ìå", Font.PLAIN, 12));
 		lblNewLabel.setBounds(29, 33, 54, 15);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("\u83DC\u7CFB\u540D");
+		lblNewLabel_1.setFont(new Font("¿¬Ìå", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(304, 33, 54, 15);
 		contentPane.add(lblNewLabel_1);
 		
 		txId = new JTextField();
-		txId.setBounds(94, 30, 135, 21);
+		txId.setBounds(94, 30, 112, 21);
 		contentPane.add(txId);
 		txId.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(368, 30, 135, 21);
+		textField_1.setBounds(368, 30, 112, 21);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JButton btnNewButton = new JButton("\u67E5\u8BE2");
-		btnNewButton.setBounds(207, 283, 68, 23);
+		btnNewButton.setBounds(279, 283, 68, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("\u4FEE\u6539");
-		btnNewButton_1.setBounds(304, 283, 68, 23);
+		btnNewButton_1.setBounds(357, 283, 68, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("\u5220\u9664");
-		btnNewButton_2.setBounds(399, 283, 68, 23);
+		btnNewButton_2.setBounds(435, 283, 68, 23);
 		contentPane.add(btnNewButton_2);
 	}
 }

@@ -87,16 +87,17 @@ public class ChoseEatForm extends JInternalFrame {
 		getContentPane().add(btnNewButton);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
 		comboBox.setBounds(236, 64, 105, 21);
 		getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u7EA2\u70E7\u72EE\u5B50\u5934", "1", "2", "3", "4", "5 "}));
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u7EA2\u70E7\u72EE\u5B50\u5934", "\u4EAC\u9171\u8089\u4E1D", "\u9505\u5305\u8089", "\u91CD\u5E86\u70E4\u9C7C"}));
 		comboBox_1.setBounds(236, 110, 105, 21);
 		getContentPane().add(comboBox_1);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
+		spinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(0), null, new Integer(1)));
 		spinner.setBounds(236, 189, 105, 22);
 		getContentPane().add(spinner);
 	}

@@ -50,14 +50,14 @@ public class MainForm extends JFrame {
 		setAlwaysOnTop(true);
 		setTitle("\u9910\u996E\u7BA1\u7406\u7CFB\u7EDF");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 833, 421);
+		setBounds(100, 100, 844, 544);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 817, 21);
+		menuBar.setBounds(0, 0, 828, 21);
 		contentPane.add(menuBar);
 		
 		JMenu menu = new JMenu("\u9910\u53F0\u7BA1\u7406");
@@ -178,7 +178,7 @@ public class MainForm extends JFrame {
 		
 		
 		
-		table.setBounds(0, 20, 817, 353);
+		table.setBounds(0, 20, 828, 486);
 		contentPane.add(table);
 		
 	}
