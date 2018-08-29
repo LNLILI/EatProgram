@@ -47,8 +47,8 @@ public class caipinDaoimpl implements caipinDao {
 	@Override
 	public int update(food food) {
 
-		String sql = "UPDATE food SET Foodname = ?,Cuisinesid=?,Unit=?,price=?WHERE id = ?";
-		return DBUTil.executeUpdate(sql,food.getFoodname(),food.getCuisinesid(),food.getUnit(),food.getPrice());
+		String sql = "UPDATE food SET food_name = ?,food_cuis=?,food_unit=?,food_price=? WHERE food_no = ?";
+		return DBUTil.executeUpdate(sql,food.getFoodname(),food.getCuisinesid(),food.getUnit(),food.getPrice(),food.getFoodid());
 		
 	}
 
@@ -61,8 +61,7 @@ public class caipinDaoimpl implements caipinDao {
 	@Override
 	public int add(food food) {
 		String sql = "insert into food values (?,?,?,?,?)";
-		return DBUTil.executeUpdate(sql,food.getFoodname(),food.getCuisinesid(),food.getUnit(),food.getPrice());
-		
+		return DBUTil.executeUpdate(sql,food.getFoodid(),food.getFoodname(),food.getCuisinesid(),food.getPrice(),food.getUnit());
 	}
 	@Override
 	public int select0() {
@@ -75,11 +74,11 @@ public class caipinDaoimpl implements caipinDao {
 			pstm = conn.prepareStatement(sql);
 			rs=pstm.executeQuery();
 			food food=new food();
-			food.setFoodid(rs.getString("Foodid"));
-			food.setFoodname(rs.getString("Foodname"));
-			food.setCuisinesid(rs.getString("Cuisinesid"));
-			food.setUnit(rs.getString("Unit"));
-			food.setPrice(rs.getString("price"));
+			food.setFoodid(rs.getString("food_no"));
+			food.setFoodname(rs.getString("food_name"));
+			food.setCuisinesid(rs.getString("food_cuis"));
+			food.setUnit(rs.getString("food_unit"));
+			food.setPrice(rs.getString("food_price"));
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}finally {

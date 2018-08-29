@@ -47,7 +47,7 @@ public class MainForm extends JFrame {
 	 * Create the frame.
 	 */
 	public MainForm() {
-		setAlwaysOnTop(true);
+//		setAlwaysOnTop(true);
 		setTitle("\u9910\u996E\u7BA1\u7406\u7CFB\u7EDF");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 844, 544);

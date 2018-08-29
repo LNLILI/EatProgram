@@ -81,7 +81,17 @@ public AddEatNumForm() {
 	textField_1.setColumns(10);
 	
 	JButton button = new JButton("\u589E\u52A0");                         
-	button.addMouseListener(new MouseAdapter() {
+	button.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			Table ta1=new Table();
+			ta1.setTableid(textField.getText());
+			ta1.setSeatnym(Integer.parseInt(textField_1.getText()));
+			tableDaoImpl ta2=new tableDaoImpl();
+			ta2.addTable(ta1);
+			JOptionPane.showMessageDialog(null, "成功");
+		}
+	});
+	/*button.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			
@@ -91,9 +101,8 @@ public AddEatNumForm() {
 			tableDaoImpl ta2=new tableDaoImpl();
 			ta2.addTable(ta1);
 			JOptionPane.showMessageDialog(null, "成功");
-			setVisible(true);
 		}
-	});
+	});*/
 	button.setBounds(131, 136, 64, 23);
 	getContentPane().add(button);
 	
