@@ -98,6 +98,7 @@ import javax.swing.JScrollPane;
 			lblNewLabel.setBounds(29, 33, 54, 15);
 			panel.add(lblNewLabel);
 			
+			
 			JLabel lblNewLabel_1 = new JLabel("\u83DC\u7CFB\u540D");
 			lblNewLabel_1.setFont(new Font("¿¬Ìå", Font.PLAIN, 12));
 			lblNewLabel_1.setBounds(304, 33, 54, 15);
