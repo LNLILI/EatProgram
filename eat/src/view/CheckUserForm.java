@@ -6,6 +6,7 @@ package view;
 	import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import entity.User;
 import userccc.usercc;
@@ -20,11 +21,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
+
+import javax.swing.JTable;
 
 	public class CheckUserForm extends JInternalFrame {
 		private JTextField textField;
 		private JTextField textField_1;
 		private JTextField textField_2;
+		private JTable table;
 
 		/**
 		 * Launch the application.
@@ -62,41 +67,9 @@ import java.sql.SQLException;
 			textField.setColumns(10);
 			
 			JButton btnNewButton = new JButton("\u67E5\u8BE2");
-			btnNewButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					String name="";
-					Connection conn = null;
-					PreparedStatement pstm = null;
-					ResultSet rs=null;
-					usercc user1 =new usercc();
-					user1.setUse_name(textField.getText());
-					String sql="select * from user where use_name=?";
-						try {
-							conn=DBUTil.getConn();
-							pstm = conn.prepareStatement(sql);
-							pstm.setString(1, user1.getUse_name());
-							rs=pstm.executeQuery();
-							rs.next();
-							user1.setUse_name(rs.getString("user_name"));
-							user1.setUse_realname(rs.getString("use_realname"));
-							user1.setUse_gender(rs.getString("use_gender"));
-							user1.setUse_pwd(rs.getString("user_pwd"));
-							user1.setUse_reg(null);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
-				}
-			});
 			
 			btnNewButton.setBounds(232, 21, 78, 23);
 			getContentPane().add(btnNewButton);
-			
-			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			tabbedPane.setBounds(21, 65, 669, 239);
-			getContentPane().add(tabbedPane);
 			
 			JLabel lblNewLabel_1 = new JLabel("\u7528\u6237\u540D\uFF1A");
 			lblNewLabel_1.setBounds(21, 337, 54, 15);
@@ -133,11 +106,74 @@ import java.sql.SQLException;
 			getContentPane().add(radioButton);
 			
 			JButton btnNewButton_1 = new JButton("\u4FEE\u6539\u5BC6\u7801");
+			btnNewButton_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
 			btnNewButton_1.setBounds(506, 333, 86, 23);
 			getContentPane().add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("\u5220\u9664");
 			btnNewButton_2.setBounds(609, 333, 66, 23);
 			getContentPane().add(btnNewButton_2);
+			
+			table = new JTable();
+			table.setBounds(42, 81, 631, 232);
+			getContentPane().add(table);
+			btnNewButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					String name="";
+					Connection conn = null;
+					PreparedStatement pstm = null;
+					ResultSet rs=null;
+					usercc user1 =new usercc();
+					user1.setUse_name(textField.getText());
+					String sql="select * from user where use_name=?";
+					String sql1="select * from user";
+					Vector v=new Vector();
+					Vector v1=new Vector();
+					Vector v2=new Vector();
+						try {
+							conn=DBUTil.getConn();
+							pstm = conn.prepareStatement(sql);
+							pstm.setString(1, user1.getUse_name());
+							rs=pstm.executeQuery();
+							rs.next();
+							user1.setUse_name(rs.getString("use_name"));
+							user1.setUse_realname(rs.getString("use_realname"));
+							user1.setUse_gender(rs.getString("use_gender"));
+							user1.setUse_pwd(rs.getString("use_pwd"));
+							user1.setUse_reg(null);
+							v2.add("用户名");
+							v2.add("真实姓名");
+							v2.add("性别");
+							v2.add("密码");
+							v2.add("注册时间");
+							v1.add(rs.getString("use_name"));
+							v1.add(rs.getString("use_realname"));
+							v1.add(rs.getString("use_gender"));
+							v1.add(rs.getString("use_pwd"));
+							v1.add(null);
+							v.add(v2);
+							v.add(v1);
+							
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						DefaultTableModel model = (DefaultTableModel)table.getModel();
+						model.setDataVector(v, v1);
+						int row = table.getSelectedRow();
+						getContentPane().add(table);
+						/*String userName=table.getValueAt(row,0).toString();
+						String typeRealname = table.getValueAt(row,1).toString();
+						String usergender = table.getValueAt(row, 2).toString();
+						String userpwd = table.getValueAt(row, 3).toString();*/
+						
+				}
+			});
+			
 		}
 	}
