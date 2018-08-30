@@ -1,7 +1,8 @@
 package view;
 
 
-	import java.awt.EventQueue;
+	import java.awt.Component;
+import java.awt.EventQueue;
 
 	import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -29,7 +30,7 @@ import javax.swing.JTable;
 		private JTextField textField;
 		private JTextField textField_1;
 		private JTextField textField_2;
-		private JTable table;
+		private static JTable table;
 
 		/**
 		 * Launch the application.
@@ -43,8 +44,10 @@ import javax.swing.JTable;
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					
 				}
 			});
+			
 		}
 
 		/**
@@ -120,6 +123,40 @@ import javax.swing.JTable;
 			
 			table = new JTable();
 			table.setBounds(42, 81, 631, 232);
+			Connection conn = null;
+			PreparedStatement pstm = null;
+			ResultSet rs=null;
+			String sql1="select * from user";
+			
+			Vector vv=new Vector();
+			Vector vv1=new Vector();
+			Vector vv2=new Vector();
+				try {
+					conn=DBUTil.getConn();
+					pstm = conn.prepareStatement(sql1);
+					rs=pstm.executeQuery();
+					vv2.add("用户名");
+					vv2.add("真实姓名");
+					vv2.add("性别");
+					vv2.add("密码");
+					vv2.add("注册时间");
+					vv.add(vv2);
+					while(rs.next()){
+						vv1=new Vector();
+						vv1.add(rs.getString("use_name"));
+						vv1.add(rs.getString("use_realname"));
+						vv1.add(rs.getString("use_gender"));
+						vv1.add(rs.getString("use_pwd"));
+						vv1.add(null);
+						vv.add(vv1);
+					}
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				DefaultTableModel model = (DefaultTableModel)table.getModel();
+				model.setDataVector(vv, vv1);
 			getContentPane().add(table);
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override

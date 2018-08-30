@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import userccc.usercc;
+import util.DBUTil;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -19,6 +24,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public class MainForm extends JFrame {
 
@@ -166,6 +178,7 @@ public class MainForm extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("\u67E5\u8BE2\u7528\u6237");
+		
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckUserForm form = new CheckUserForm();
