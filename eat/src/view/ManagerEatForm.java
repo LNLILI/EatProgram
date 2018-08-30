@@ -22,10 +22,11 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.caixiDao;
 import dao.impl.caixiDaoimpl;
+import javax.swing.JScrollPane;
 
 	public class ManagerEatForm extends JInternalFrame {
 		private JTable table;
-		private JPanel contentPane;
+		private JPanel panel;
 		private JTextField txId;
 		private JTextField textField_1;
 
@@ -58,11 +59,16 @@ import dao.impl.caixiDaoimpl;
 			
 			
 			
-			contentPane = new JPanel();
-			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-			setContentPane(contentPane);
-			contentPane.setLayout(null);
+			panel = new JPanel();
+			panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+			setContentPane(panel);
+			panel.setLayout(null);
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 58, 493, 196);
+			panel.add(scrollPane);
 			table = new JTable();
+			table.setBounds(10, 58, 493, 196);
+			scrollPane.setViewportView(table);
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -86,41 +92,41 @@ import dao.impl.caixiDaoimpl;
 			v.add("菜系号");
 			v.add("菜系名");
 			model.setDataVector(caixiDao.select(), v);
-
-
-			getContentPane().add(table);
 			
 			JLabel lblNewLabel = new JLabel("\u83DC\u7CFB\u53F7");
 			lblNewLabel.setFont(new Font("楷体", Font.PLAIN, 12));
 			lblNewLabel.setBounds(29, 33, 54, 15);
-			contentPane.add(lblNewLabel);
+			panel.add(lblNewLabel);
+			
 			
 			JLabel lblNewLabel_1 = new JLabel("\u83DC\u7CFB\u540D");
 			lblNewLabel_1.setFont(new Font("楷体", Font.PLAIN, 12));
 			lblNewLabel_1.setBounds(304, 33, 54, 15);
-			contentPane.add(lblNewLabel_1);
+			panel.add(lblNewLabel_1);
 			
 			txId = new JTextField();
 			txId.setBounds(94, 30, 112, 21);
-			contentPane.add(txId);
+			panel.add(txId);
 			txId.setColumns(10);
 			
 			textField_1 = new JTextField();
 			textField_1.setBounds(368, 30, 112, 21);
-			contentPane.add(textField_1);
+			panel.add(textField_1);
 			textField_1.setColumns(10);
 			
 			JButton btnNewButton = new JButton("\u67E5\u8BE2");
 			btnNewButton.setBounds(279, 283, 68, 23);
-			contentPane.add(btnNewButton);
+			panel.add(btnNewButton);
 			
 			JButton btnNewButton_1 = new JButton("\u4FEE\u6539");
 			btnNewButton_1.setBounds(357, 283, 68, 23);
-			contentPane.add(btnNewButton_1);
+			panel.add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("\u5220\u9664");
 			btnNewButton_2.setBounds(435, 283, 68, 23);
-			contentPane.add(btnNewButton_2);
+			panel.add(btnNewButton_2);
+			
+			
 		}
 
 	}

@@ -42,7 +42,7 @@ public class caipinDaoimpl implements caipinDao {
 		}finally {
 			DBUTil.close(conn, pstm, rs);
 		}
-		return null;
+		return rowv;
 	}
 	@Override
 	public int update(food food) {
@@ -53,8 +53,8 @@ public class caipinDaoimpl implements caipinDao {
 	}
 
 	@Override
-	public int delete(int id) {
-		String sql = "delete from food Where id=?";
+	public int delete(String id) {
+		String sql = "delete from food Where food_no =?";
 		return DBUTil.executeUpdate(sql,id);
 		
 	}
@@ -64,27 +64,37 @@ public class caipinDaoimpl implements caipinDao {
 		return DBUTil.executeUpdate(sql,food.getFoodid(),food.getFoodname(),food.getCuisinesid(),food.getPrice(),food.getUnit());
 	}
 	@Override
-	public int select0() {
+	public Vector select0(String name) {
+		System.out.println("###"+name);
+		Vector rowv = new Vector<>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
-		ResultSet rs=null;
-		String sql="select*from food where Foodname=?";
+		ResultSet rs = null;
+		String sql = "select * from food where food_name = ?";
+		System.out.println(sql);
 	    try {
-	    	conn=DBUTil.getConn();
+	    	conn = DBUTil.getConn();
 			pstm = conn.prepareStatement(sql);
-			rs=pstm.executeQuery();
-			food food=new food();
-			food.setFoodid(rs.getString("food_no"));
-			food.setFoodname(rs.getString("food_name"));
-			food.setCuisinesid(rs.getString("food_cuis"));
-			food.setUnit(rs.getString("food_unit"));
-			food.setPrice(rs.getString("food_price"));
+			pstm.setString(1, name);
+			rs = pstm.executeQuery();
+			Vector v;
+			System.out.println(rs.getRow());
+			while(rs.next()){
+			v = new Vector();
+			v.add(rs.getString("food_no"));
+			v.add(rs.getString("food_name"));
+			v.add(rs.getString("food_cuis"));
+			v.add(rs.getString("food_unit"));
+			v.add(rs.getFloat("food_price"));
+			rowv.add(v);
+			}
+			System.out.println(rowv.size());
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}finally {
 			DBUTil.close(conn, pstm, rs);
 		}
-		return 0;
+		return rowv;
 	
 	
 	}
