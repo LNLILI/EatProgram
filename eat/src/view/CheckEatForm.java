@@ -143,6 +143,7 @@ public class CheckEatForm extends JInternalFrame {
 		getContentPane().add(lblNewLabel_1);
 		
 		tf_no = new JTextField();
+		tf_no.setEditable(false);
 		tf_no.setBounds(50, 405, 54, 21);
 		getContentPane().add(tf_no);
 		tf_no.setColumns(10);
@@ -179,6 +180,7 @@ public class CheckEatForm extends JInternalFrame {
 		getContentPane().add(lblNewLabel_5);
 		
 		tf_unit = new JTextField();
+		tf_unit.setEditable(false);
 		tf_unit.setBounds(562, 405, 46, 21);
 		getContentPane().add(tf_unit);
 		tf_unit.setColumns(10);

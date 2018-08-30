@@ -13,4 +13,5 @@ public interface caipinDao {
   public int delete(String id);
   public int add(food food);
   public Vector select0(String name);
+  public Vector ROU();
 }

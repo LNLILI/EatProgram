@@ -9,5 +9,5 @@ public interface tableDao {
 
 	public Vector selectTable();
 	public int addTable(Table table);
-	
+	public Vector XL();
 }

@@ -4,6 +4,7 @@ package dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -82,6 +83,40 @@ public class caixiDaoimpl implements caixiDao {
 		return rowv;
 	
 	}
+
+
+	@Override
+	public Vector CX() {
+		Vector vallVector = new Vector();
+		Connection conn=null;
+		try {
+			conn = DBUTil.getConn();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String sql="select * from cuisines ";
+		PreparedStatement pst=null;
+		ResultSet rs=null;
+		try {
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while(rs.next()){
+				cuisines c =new cuisines();
+				c.setCuisinesid((rs.getString("cuis_no")));
+				c.setCuisinesname((rs.getString("cuis_name")));
+				
+				
+				vallVector.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUTil.close(conn, pst, rs);
+		}
+		return vallVector;
+	}
+
 
 
 

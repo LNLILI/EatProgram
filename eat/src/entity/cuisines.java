@@ -22,4 +22,9 @@ public class cuisines  implements Serializable {
 	public void setCuisinesname(String cuisinesname) {
 		Cuisinesname = cuisinesname;
 	}
+	@Override
+	public String toString() {
+		return Cuisinesname ;
+	}
+	
 }

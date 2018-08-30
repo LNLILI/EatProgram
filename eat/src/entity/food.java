@@ -43,6 +43,11 @@ public class food implements Serializable {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	@Override
+	public String toString() {
+		return  Foodname;
+			
+	}
 	
 	}
 

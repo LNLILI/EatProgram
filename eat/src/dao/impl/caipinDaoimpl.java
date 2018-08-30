@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Vector;
 
 import dao.caipinDao;
+import entity.Table;
 import entity.food;
 import util.DBUTil;
 
@@ -98,6 +99,37 @@ public class caipinDaoimpl implements caipinDao {
 	
 	
 	}
-	
-
+	@Override
+	public Vector ROU() {
+		Vector vallVector = new Vector();
+		Connection conn=null;
+		try {
+			conn = DBUTil.getConn();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String sql="select * from food ";
+		PreparedStatement pst=null;
+		ResultSet rs=null;
+		try {
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while(rs.next()){
+				food f =new food();
+				f.setFoodid((rs.getString("food_no")));
+				f.setFoodname((rs.getString("food_name")));
+				f.setCuisinesid((rs.getString("food_cuis")));
+				f.setUnit((rs.getString("food_unit")));
+				f.setPrice((rs.getString("food_price")));
+				
+				vallVector.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUTil.close(conn, pst, rs);
+		}
+		return vallVector;
+	}
 }

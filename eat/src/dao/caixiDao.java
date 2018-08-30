@@ -13,4 +13,5 @@ public interface caixiDao {
 	  public int update(cuisines cuisines);
 	  public int delete(String id);
 	  public Vector select1(String no);
+	  public Vector CX();
 }

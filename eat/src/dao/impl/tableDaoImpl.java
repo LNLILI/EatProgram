@@ -3,6 +3,7 @@ package dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -46,7 +47,36 @@ public class tableDaoImpl implements tableDao{
 		return DBUTil.executeUpdate(sql, table.getTableid(),table.getSeatnym());
 		
 	}
-	
+
+	@Override
+	public Vector XL() {
+		Vector vallVector = new Vector();
+		Connection conn=null;
+		try {
+			conn = DBUTil.getConn();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String sql="select * from tables ";
+		PreparedStatement pst=null;
+		ResultSet rs=null;
+		try {
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while(rs.next()){
+				Table tab =new Table();
+				tab.setTableid((rs.getString("table_no")));
+				tab.setSeatnym(rs.getInt("table_num"));
+				vallVector.add(tab);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUTil.close(conn, pst, rs);
+		}
+		return vallVector;
+	}
 	
 
 }

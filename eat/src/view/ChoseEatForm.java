@@ -17,7 +17,11 @@ import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import dao.caipinDao;
+import dao.tableDao;
+import dao.impl.caipinDaoimpl;
 import dao.impl.menuItemsDaoImpl;
+import dao.impl.tableDaoImpl;
 import entity.Menu;
 import entity.Menuitems;
 import entity.food;
@@ -31,6 +35,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class ChoseEatForm extends JInternalFrame {
 	private JTextField ел;
@@ -100,13 +105,25 @@ public class ChoseEatForm extends JInternalFrame {
 		
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1001", "1002", "1003"}));
+	//	comboBox.setModel(new DefaultComboBoxModel(new String[] {"1001", "1002", "1003"}));
+		tableDao dao=new tableDaoImpl();
+		Vector v=dao.XL();
+		comboBox.removeAllItems();
+		for (int i = 0; i < v.size(); i++) {
+			comboBox.addItem(v.get(i));
+		}
 		comboBox.setToolTipText("");
 		comboBox.setBounds(236, 64, 105, 21);
 		getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u7EA2\u70E7\u8089", "\u714E\u997C\u679C\u5B50", "\u7532\u9C7C\u7172\u4ED4\u996D", "\u5BAB\u4FDD\u9E21\u4E01"}));
+		//comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u7EA2\u70E7\u8089", "\u714E\u997C\u679C\u5B50", "\u7532\u9C7C\u7172\u4ED4\u996D", "\u5BAB\u4FDD\u9E21\u4E01"}));
+		caipinDao dao1=new caipinDaoimpl();
+		Vector v1=dao1.ROU();
+		comboBox_1.removeAllItems();
+		for (int i = 0; i < v1.size(); i++) {
+			comboBox_1.addItem(v1.get(i));
+		}
 		comboBox_1.setBounds(236, 110, 105, 21);
 		getContentPane().add(comboBox_1);
 		

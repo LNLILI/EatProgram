@@ -30,6 +30,10 @@ public class Table implements Serializable{
 	public void setSeatnym(int seatnym) {
 		this.seatnym = seatnym;
 	}
+	@Override
+	public String toString() {
+		return tableid;
+	}
 	
 	
 }

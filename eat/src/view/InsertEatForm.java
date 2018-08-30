@@ -10,7 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import dao.caipinDao;
+import dao.caixiDao;
 import dao.impl.caipinDaoimpl;
+import dao.impl.caixiDaoimpl;
 import dao.impl.tableDaoImpl;
 import entity.Table;
 import entity.food;
@@ -21,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 public class InsertEatForm extends JInternalFrame {
 	private JTextField textField;
@@ -101,7 +105,13 @@ public class InsertEatForm extends JInternalFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("¿¬Ìå", Font.PLAIN, 12));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"101", "102", "103", "104", "105"}));
+		//comboBox.setModel(new DefaultComboBoxModel(new String[] {"101", "102", "103", "104", "105"}));
+		caixiDao dao2=new caixiDaoimpl();
+		Vector v2=dao2.CX();
+		comboBox.removeAllItems();
+		for (int i = 0; i < v2.size(); i++) {
+			comboBox.addItem(v2.get(i));
+		}
 		comboBox.setBounds(296, 36, 68, 21);
 		getContentPane().add(comboBox);
 		
