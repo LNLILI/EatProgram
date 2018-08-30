@@ -12,5 +12,5 @@ public interface caipinDao {
   public int update(food food);
   public int delete(int id);
   public int add(food food);
-  public int select0();
+  public Vector select0(String name);
 }
