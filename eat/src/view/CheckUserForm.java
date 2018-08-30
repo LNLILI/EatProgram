@@ -78,7 +78,11 @@ import java.sql.SQLException;
 							pstm.setString(1, user1.getUse_name());
 							rs=pstm.executeQuery();
 							rs.next();
-							user1.setUse_realname(rs.getString("food_no"));
+							user1.setUse_name(rs.getString("user_name"));
+							user1.setUse_realname(rs.getString("use_realname"));
+							user1.setUse_gender(rs.getString("use_gender"));
+							user1.setUse_pwd(rs.getString("user_pwd"));
+							user1.setUse_reg(null);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
