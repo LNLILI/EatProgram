@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -22,13 +23,18 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.caixiDao;
 import dao.impl.caixiDaoimpl;
+import entity.cuisines;
+import entity.food;
+
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 	public class ManagerEatForm extends JInternalFrame {
 		private JTable table;
 		private JPanel panel;
-		private JTextField txId;
-		private JTextField textField_1;
+		private JTextField tf;
+		private JTextField tf_name;
 
 		/**
 		 * Launch the application.
@@ -76,22 +82,22 @@ import javax.swing.JScrollPane;
 					// JOptionPane.showMessageDialog(null, "ok");
 					// 得到选中行数
 					int row = table.getSelectedRow();
-					String id = table.getValueAt(row, 0).toString();
-					String typeName = table.getValueAt(row,1).toString();
+					String no = table.getValueAt(row, 0).toString();
+					String name = table.getValueAt(row,1).toString();
 					
-					txId.setText(id);
-					textField_1.setText(typeName);;
+					tf.setText(no);
+					tf_name.setText(name);;
 				}
 			});
 	        table.setBounds(10, 58, 493, 196);
 			
 			DefaultTableModel model = (DefaultTableModel)table.getModel();
-			caixiDao  caixiDao = new caixiDaoimpl();
+			caixiDao  dao = new caixiDaoimpl();
 			Vector v=new Vector();
 			
 			v.add("菜系号");
 			v.add("菜系名");
-			model.setDataVector(caixiDao.select(), v);
+			model.setDataVector(dao.select(), v);
 			
 			JLabel lblNewLabel = new JLabel("\u83DC\u7CFB\u53F7");
 			lblNewLabel.setFont(new Font("楷体", Font.PLAIN, 12));
@@ -104,25 +110,61 @@ import javax.swing.JScrollPane;
 			lblNewLabel_1.setBounds(304, 33, 54, 15);
 			panel.add(lblNewLabel_1);
 			
-			txId = new JTextField();
-			txId.setBounds(94, 30, 112, 21);
-			panel.add(txId);
-			txId.setColumns(10);
+			tf = new JTextField();
+			tf.setBounds(94, 30, 112, 21);
+			panel.add(tf);
+			tf.setColumns(10);
 			
-			textField_1 = new JTextField();
-			textField_1.setBounds(368, 30, 112, 21);
-			panel.add(textField_1);
-			textField_1.setColumns(10);
+			tf_name = new JTextField();
+			tf_name.setBounds(368, 30, 112, 21);
+			panel.add(tf_name);
+			tf_name.setColumns(10);
 			
 			JButton btnNewButton = new JButton("\u67E5\u8BE2");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Vector v=new Vector();
+					v.add("菜系号");
+					v.add("菜系名");
+					
+					if(tf.getText()!=null){
+						model.setDataVector(dao.select1((tf.getText())), v);
+						table.setModel(model);
+					}
+				}
+			});
 			btnNewButton.setBounds(279, 283, 68, 23);
 			panel.add(btnNewButton);
 			
 			JButton btnNewButton_1 = new JButton("\u4FEE\u6539");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String no = tf.getText();
+					String name = tf_name.getText();
+					cuisines c = new cuisines();
+					c.setCuisinesid(no);
+					c.setCuisinesname(name);
+					int i =dao.update(c);
+					if(i==1){
+						JOptionPane.showMessageDialog(null, "修改成功");
+						DefaultTableModel model = (DefaultTableModel)table.getModel();
+						model.setDataVector(dao.select(), v);
+						table.setModel(model);
+					}else{
+						JOptionPane.showMessageDialog(null, "修改失败");
+					}
+				}
+			});
 			btnNewButton_1.setBounds(357, 283, 68, 23);
 			panel.add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("\u5220\u9664");
+			btnNewButton_2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(null, "菜系无法删除");
+				}
+			});
+
 			btnNewButton_2.setBounds(435, 283, 68, 23);
 			panel.add(btnNewButton_2);
 			

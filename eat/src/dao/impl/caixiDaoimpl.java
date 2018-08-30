@@ -44,36 +44,42 @@ public class caixiDaoimpl implements caixiDao {
 
 	@Override
 	public int update(cuisines cuisines) {
-		String sql = "UPDATE cuisines SET Cuisinesname = ?,Cuisinesid=?WHERE id = ?";
+		String sql = "UPDATE cuisines SET cuis_name = ?WHERE cuis_no = ?";
 		return DBUTil.executeUpdate(sql,cuisines.getCuisinesname(),cuisines.getCuisinesid());
 	}
 
 	@Override
-	public int delete(int id) {
-		String sql = "delete from food Where id=?";
+	public int delete(String id) {
+		String sql = "delete from cuisines Where cuis_no=?";
 		return DBUTil.executeUpdate(sql,id);
 	}
 
 
 	@Override
-	public int select1() {
+	public Vector select1(String no) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs=null;
-		String sql="select*from cuisines where Cuisinesid=?";
+		String sql="select*from cuisines where cuis_no=?";
+		Vector rowv = new Vector<>();
 	    try {
 	    	conn=DBUTil.getConn();
 			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, no);
 			rs=pstm.executeQuery();
-			cuisines c=new cuisines();
-			c.setCuisinesname(rs.getString("Cuisinesname"));
-			c.setCuisinesid(rs.getString("Cuisinesid"));
+			Vector v;
+			while(rs.next()){
+				v = new Vector();
+				v.add(rs.getString("cuis_no"));
+				v.add(rs.getString("cuis_name"));
+				rowv.add(v);
+			}
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}finally {
 			DBUTil.close(conn, pstm, rs);
 		}
-		return 0;
+		return rowv;
 	
 	}
 
