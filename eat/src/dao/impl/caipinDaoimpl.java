@@ -53,8 +53,8 @@ public class caipinDaoimpl implements caipinDao {
 	}
 
 	@Override
-	public int delete(int id) {
-		String sql = "delete from food Where id=?";
+	public int delete(String id) {
+		String sql = "delete from food Where food_no =?";
 		return DBUTil.executeUpdate(sql,id);
 		
 	}
