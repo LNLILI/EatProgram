@@ -21,7 +21,13 @@ public class Menuitems implements Serializable {
 	/**
 	 * ²ËÆ·ºÅ
 	 */
-	private food food;
+	private String foodName;
+	public String getFoodName() {
+		return foodName;
+	}
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
 	/**
 	 * ÊýÁ¿
 	 */
@@ -43,12 +49,7 @@ public class Menuitems implements Serializable {
 	public void setMenuid(Menu menu) {
 		this.menu = menu;
 	}
-	public food getFood() {
-		return food;
-	}
-	public void setFoodid(food food) {
-		this.food = food;
-	}
+	
 	public int getAmount() {
 		return amount;
 	}

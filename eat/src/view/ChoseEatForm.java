@@ -16,11 +16,26 @@ import javax.swing.JEditorPane;
 import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
+import dao.impl.menuItemsDaoImpl;
+import entity.Menu;
+import entity.Menuitems;
+import entity.food;
+import util.DBUTil;
+
+import javax.swing.ComboBoxEditor;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ChoseEatForm extends JInternalFrame {
 	private JTextField ≈Ã;
 	private JTextField textField_1;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -82,24 +97,65 @@ public class ChoseEatForm extends JInternalFrame {
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnNewButton = new JButton("\u786E\u5B9A");
-		btnNewButton.setBounds(182, 278, 93, 23);
-		getContentPane().add(btnNewButton);
+		
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1001", "1002", "1003"}));
+		comboBox.setToolTipText("");
 		comboBox.setBounds(236, 64, 105, 21);
 		getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u7EA2\u70E7\u72EE\u5B50\u5934", "\u4EAC\u9171\u8089\u4E1D", "\u9505\u5305\u8089", "\u91CD\u5E86\u70E4\u9C7C"}));
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"\u7EA2\u70E7\u8089", "\u714E\u997C\u679C\u5B50", "\u7532\u9C7C\u7172\u4ED4\u996D", "\u5BAB\u4FDD\u9E21\u4E01"}));
 		comboBox_1.setBounds(236, 110, 105, 21);
 		getContentPane().add(comboBox_1);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(0), null, new Integer(1)));
-		spinner.setBounds(236, 189, 105, 22);
-		getContentPane().add(spinner);
+		JButton btnNewButton = new JButton("\u786E\u5B9A");
+		btnNewButton.setBounds(182, 278, 93, 23);
+		getContentPane().add(btnNewButton);
+		
+		textField = new JTextField();
+		textField.setBounds(236, 192, 105, 21);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String no1="";
+				Menuitems menu=new Menuitems();
+				food food1=new food();
+				Menu mm1=new Menu();
+				String no=comboBox.getSelectedItem().toString();
+				System.out.println("no:"+no);
+				mm1.setTableId(no);
+				String name=comboBox_1.getSelectedItem().toString();
+				System.out.println("name:"+name);
+				Connection conn = null;
+				PreparedStatement pstm = null;
+				ResultSet rs=null;
+				String sql="select food_no from food where food_name=?";
+				try {
+					conn=DBUTil.getConn();
+					pstm = conn.prepareStatement(sql);
+					pstm.setString(1, name);
+					rs=pstm.executeQuery();
+					rs.next();
+					no1=rs.getString("food_no");
+					System.out.println("no1:"+no1);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				menu.setFoodName(no1);
+				String sql1 = "insert into menuitems values(?,?,?,?,null)";
+				int nono=203;
+				nono++;
+				menu.setAmount(Integer.parseInt(textField.getText()));
+				System.out.println("amount:"+menu.getAmount());
+				DBUTil.executeUpdate(sql1,nono,mm1.getTableId(),menu.getFoodName(),menu.getAmount());
+				System.out.println("µ„≤Õ≥…π¶");
+			}
+		});
 	}
 }
 

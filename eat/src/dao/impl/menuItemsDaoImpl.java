@@ -20,7 +20,7 @@ public class menuItemsDaoImpl implements menuItemsDao {
 		String sql = "insert into menu values(null,?,?,?,?)";
 		String sql1 = "insert into menuitems values(null,?,?,?,?)";
 		DBUTil.executeUpdate(sql,menu.getTableId(),menu.getMenuTime(),menu.getTotalPrice(),false);
-		return DBUTil.executeUpdate(sql1, mi.getMenu().getMenuId(),mi.getFood().getFoodid(),mi.getAmount(),mi.getItemsTotalprice());
+		return DBUTil.executeUpdate(sql1, mi.getMenu().getMenuId(),mi.getFoodName(),mi.getAmount(),mi.getItemsTotalprice());
 	}
 
 	@Override

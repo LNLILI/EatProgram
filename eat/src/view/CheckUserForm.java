@@ -6,9 +6,20 @@ package view;
 	import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import entity.User;
+import userccc.usercc;
+import util.DBUTil;
+
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JRadioButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 	public class CheckUserForm extends JInternalFrame {
 		private JTextField textField;
@@ -51,6 +62,31 @@ import javax.swing.JRadioButton;
 			textField.setColumns(10);
 			
 			JButton btnNewButton = new JButton("\u67E5\u8BE2");
+			btnNewButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					String name="";
+					Connection conn = null;
+					PreparedStatement pstm = null;
+					ResultSet rs=null;
+					usercc user1 =new usercc();
+					user1.setUse_name(textField.getText());
+					String sql="select * from user where use_name=?";
+						try {
+							conn=DBUTil.getConn();
+							pstm = conn.prepareStatement(sql);
+							pstm.setString(1, user1.getUse_name());
+							rs=pstm.executeQuery();
+							rs.next();
+							name=rs.getString("food_no");
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+				}
+			});
+			
 			btnNewButton.setBounds(232, 21, 78, 23);
 			getContentPane().add(btnNewButton);
 			
